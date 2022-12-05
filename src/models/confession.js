@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-const confessionSchenma = new mongoose.Schema({
+const confessionSchema = new mongoose.Schema({
     text: {
         type: String,
         required: true,
@@ -11,8 +11,20 @@ const confessionSchenma = new mongoose.Schema({
         type: Buffer
     },
     status: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: 'new'
+    },
+    confessionIndex: {
+        type: Number,
+        unique: true
+    },
+    publishTime: {
+        type: Date
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
 
 }, {
@@ -20,7 +32,7 @@ const confessionSchenma = new mongoose.Schema({
 })
 
 
-const Confession = mongoose.model('Task', confessionSchenma)
+const Confession = mongoose.model('Confessions', confessionSchema)
 
 
-module.exports = Task
+module.exports = Confession
