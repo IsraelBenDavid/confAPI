@@ -16,10 +16,14 @@ const confessionSchema = new mongoose.Schema({
     },
     confessionIndex: {
         type: Number,
-        unique: true
+        default: 0
     },
     publishTime: {
-        type: Date
+        type: Number,
+        default: 0
+    },
+    facebookId: {
+        type: String
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
@@ -32,7 +36,7 @@ const confessionSchema = new mongoose.Schema({
 })
 
 
-const Confession = mongoose.model('Confessions', confessionSchema)
+const Confession = mongoose.model('Confession', confessionSchema)
 
 
 module.exports = Confession

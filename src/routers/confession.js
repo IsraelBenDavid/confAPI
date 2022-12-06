@@ -1,4 +1,6 @@
 const express = require('express')
+const FB = require('fb')
+
 const auth = require('../middleware/auth')
 const Confession = require("../models/confession");
 const User = require("../models/user.js");
@@ -20,6 +22,20 @@ router.post('/confessions', auth, async (req, res) => {
         res.status(400).send(e)
     }
 })
+
+
+router.get('/posts', auth, async (req, res) => {
+    FB.setAccessToken(req.user.facebookAccessToken);
+
+    FB.api(
+        '/posts',
+        'GET',
+        function(response) {
+            res.send(response)
+        }
+    );
+})
+
 
 router.get('/confessions', auth, async (req, res) => {
     const match = {}

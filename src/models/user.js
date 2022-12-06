@@ -43,6 +43,15 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    lastConfessionTime: {
+        type: Number,
+        default: 0,
+        validate(value) {
+            if (value < 0) {
+                throw new Error('Index must be a positive number')
+            }
+        }
+    },
     facebookAccessToken: {
         type: String,
         required: true,
